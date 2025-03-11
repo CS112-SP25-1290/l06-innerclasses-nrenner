@@ -74,7 +74,11 @@ public class Main
 					break;
 				case 3:
 					/***** TODO: (Part 1) implement a comparison case using the comparable method on the Person class to compare self to p1-p4*****/
-					
+
+					for(Person p : people) {
+						System.out.println("Comparing self (you) to " + p.getName() + ": " + self.compareTo(p));
+					}
+
 					System.out.println("\nReturning to main menu.\n");
 					break;
 				case 4:
