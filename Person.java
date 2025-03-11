@@ -1,6 +1,6 @@
 import java.nio.charset.MalformedInputException;
 
-public class Person implements Comparable
+public class Person implements Comparable<Person>
 {
 	/***** TODO: (Part 2) create helper inner class for Identity*****/
 
@@ -81,15 +81,13 @@ public class Person implements Comparable
 			this.privilege == otherPerson.privilege;	
 	}
 
-	@Override
-	public int compareTo(Object o) {
-		if(!(o instanceof Person otherPerson)) {
-			throw new NullPointerException("No valid person identified.");
-		}
-
-		return Integer.compare(this.privilege, otherPerson.privilege);
-	}
 
 	// INTERFACE METHODS
 	/***** TODO: (Part 1) override compareTo method to implement Comparable interface*****/
+
+	@Override
+	public int compareTo(Person otherPerson) {
+		return Integer.compare(this.privilege, otherPerson.privilege);
+	}
+
 }
