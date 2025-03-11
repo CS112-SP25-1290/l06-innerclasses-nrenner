@@ -6,27 +6,30 @@ public class Person implements Comparable<Person>
 
 	// CONSTANT VARIABLES
 	public static final String DEFAULT_NAME = "Jamie Doe";
-	public static final String DEFAULT_STORY =  "Unknown";
+	public static final String DEFAULT_PRONOUNS = "Jamie/Doe";
+	public static final String DEFAULT_BACKGROUND = "Narnia";
 	public static final int DEFAULT_PRIVILEGE = 100;
 
 	// INSTANCE VARIABLES
-	private String name, story;
+	private String name;
+	private String pronouns;
+	private String background;
 	private int privilege;
 
 	// CONSTRUCTORS	
-	public Person(String name, String story, int privilege) {
-		this.setAll(name, story, privilege);
+	public Person(String name, String pronouns, String background, int privilege) {
+		this.setAll(name, pronouns, background, privilege);
 	}
 		
 	public Person() {
-		this(DEFAULT_NAME, DEFAULT_STORY, DEFAULT_PRIVILEGE);
+		this(DEFAULT_NAME, DEFAULT_PRONOUNS, DEFAULT_BACKGROUND, DEFAULT_PRIVILEGE);
 	}
 	
 	public Person(Person original) {
 		if(original == null) {
 			throw new IllegalArgumentException("Cannot copy null obect in Person copy constructor");
 		} else {
-			this.setAll(original.name, original.story, original.privilege);
+			this.setAll(original.name, original.pronouns, original.background, original.privilege);
 		}
 	}
 
@@ -35,27 +38,36 @@ public class Person implements Comparable<Person>
 		this.name = name;
 	}
 
-	public void setStory(String story) {
-		this.story = story;
+	public String getPronouns() {
+		return pronouns;
+	}
+
+	public void setPronouns(String pronouns) {
+		this.pronouns = pronouns;
+	}
+
+	public String getBackground() {
+		return background;
+	}
+
+	public void setBackground(String background) {
+		this.background = background;
 	}
 
 	public void setPrivilege(int privilege) {
 		this.privilege = privilege;
 	}
 
-	public void setAll(String name, String story, int privilege) {
+	public void setAll(String name, String pronouns, String background, int privilege) {
 		this.setPrivilege(privilege);
 		this.setName(name);
-		this.setStory(story);
+		this.setBackground(background);
+		this.setPronouns(pronouns);
 	}
 
 	// ACCESSORS / GETTERS
 	public String getName() {
 		return this.name;
-	}
-		
-	public String getStory() {
-		return this.story;
 	}
 
 	public int getPrivilege() {
@@ -66,7 +78,7 @@ public class Person implements Comparable<Person>
 	@Override
 	public String toString()
 	{
-		return "My name is "+ this.name + " and "+ this.story + "\n"
+		return "My name is "+ this.name + " ("+ this.pronouns + ") and " + this.getBackground() + "\n"
 				+ "According to this calculator I ended up with "+ this.privilege + " estimated privilege points";
 	}
 	
@@ -77,8 +89,8 @@ public class Person implements Comparable<Person>
 		      return false;
 		}
 
-        return this.name.equals(otherPerson.name) && this.story.equals(otherPerson.story) &&
-			this.privilege == otherPerson.privilege;	
+        return this.name.equals(otherPerson.name) && this.background.equals(otherPerson.background) && this.pronouns.equals(otherPerson.pronouns)
+			&& this.privilege == otherPerson.privilege;
 	}
 
 
@@ -90,4 +102,38 @@ public class Person implements Comparable<Person>
 		return Integer.compare(this.privilege, otherPerson.privilege);
 	}
 
+
+	public static class Identity {
+
+		private String pronouns;
+		private String background;
+
+		public Identity() {}
+
+		public Identity(String pronouns, String background) {
+			this.pronouns = pronouns;
+			this.background = background;
+		}
+
+		public String getPronouns() {
+			return pronouns;
+		}
+
+		public void setPronouns(String pronouns) {
+			this.pronouns = pronouns;
+		}
+
+		public String getBackground() {
+			return background;
+		}
+
+		public void setBackground(String background) {
+			this.background = background;
+		}
+
+		public String toString() {
+			return "Identity: " + pronouns + ", " + background;
+		}
+	}
 }
+
