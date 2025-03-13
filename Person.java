@@ -1,5 +1,3 @@
-import java.nio.charset.MalformedInputException;
-
 public class Person implements Comparable<Person>
 {
 	/***** TODO: (Part 2) create helper inner class for Identity*****/
@@ -12,24 +10,23 @@ public class Person implements Comparable<Person>
 
 	// INSTANCE VARIABLES
 	private String name;
-	private String pronouns;
-	private String background;
+	private Identity id;
 	private int privilege;
 
 	// CONSTRUCTORS	
-	public Person(String name, String pronouns, String background, int privilege) {
-		this.setAll(name, pronouns, background, privilege);
+	public Person(String name, Identity id, int privilege) {
+		this.setAll(name, id, privilege);
 	}
 		
 	public Person() {
-		this(DEFAULT_NAME, DEFAULT_PRONOUNS, DEFAULT_BACKGROUND, DEFAULT_PRIVILEGE);
+		this(DEFAULT_NAME, new Identity(DEFAULT_PRONOUNS, DEFAULT_BACKGROUND), DEFAULT_PRIVILEGE);
 	}
 	
 	public Person(Person original) {
 		if(original == null) {
 			throw new IllegalArgumentException("Cannot copy null obect in Person copy constructor");
 		} else {
-			this.setAll(original.name, original.pronouns, original.background, original.privilege);
+			this.setAll(original.name, original.getId(), original.privilege);
 		}
 	}
 
@@ -37,32 +34,30 @@ public class Person implements Comparable<Person>
 	public void setName(String name) {
 		this.name = name;
 	}
-
-	public String getPronouns() {
-		return pronouns;
+	
+	public Identity getId() {
+		return this.id;
+	}
+	public void setId(Identity id){
+		this.id = id;
 	}
 
 	public void setPronouns(String pronouns) {
-		this.pronouns = pronouns;
-	}
-
-	public String getBackground() {
-		return background;
+		this.getId().setPronouns(pronouns);
 	}
 
 	public void setBackground(String background) {
-		this.background = background;
+		this.getId().setBackground(background);
 	}
 
 	public void setPrivilege(int privilege) {
 		this.privilege = privilege;
 	}
 
-	public void setAll(String name, String pronouns, String background, int privilege) {
+	public void setAll(String name, Identity id, int privilege) {
 		this.setPrivilege(privilege);
+		this.setId(id);
 		this.setName(name);
-		this.setBackground(background);
-		this.setPronouns(pronouns);
 	}
 
 	// ACCESSORS / GETTERS
@@ -78,7 +73,7 @@ public class Person implements Comparable<Person>
 	@Override
 	public String toString()
 	{
-		return "My name is "+ this.name + " ("+ this.pronouns + ") and " + this.getBackground() + "\n"
+		return "My name is "+ this.name + " ("+ this.getId().getPronouns() + ") and " + this.getId().getBackground() + "\n"
 				+ "According to this calculator I ended up with "+ this.privilege + " estimated privilege points";
 	}
 	
@@ -89,7 +84,7 @@ public class Person implements Comparable<Person>
 		      return false;
 		}
 
-        return this.name.equals(otherPerson.name) && this.background.equals(otherPerson.background) && this.pronouns.equals(otherPerson.pronouns)
+        return this.name.equals(otherPerson.name) && this.getId().getBackground().equals(otherPerson.getId().getBackground()) && this.getId().getPronouns().equals(otherPerson.getId().getPronouns())
 			&& this.privilege == otherPerson.privilege;
 	}
 

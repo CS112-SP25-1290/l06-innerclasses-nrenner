@@ -34,10 +34,10 @@ public class Main
 	public static void main(String[] args)
 	{
 		// DECLARATION + INITIALIZATION
-		Person p1 = new Person("Amira", "She/her", "I am a Syrian refugee.", 40);
-		Person p2 = new Person("D'Andra", "She/her", "I am an African-American trans woman.", -20);
-		Person p3 = new Person("Jennifer", "She/her", "I am a New Yorker", 140);
-		Person p4 = new Person("Pete", "She/her", "I am a guy from Pennsylvania", 200);
+		Person p1 = new Person("Amira", new Person.Identity("She/her", "I am a Syrian refugee."), 40);
+		Person p2 = new Person("D'Andra", new Person.Identity("She/her", "I am an African-American trans woman."), -20);
+		Person p3 = new Person("Jennifer", new Person.Identity("She/her", "I am a New Yorker"), 140);
+		Person p4 = new Person("Pete", new Person.Identity("He/him", "I am a guy from Pennsylvania"), 200);
 		Person self = new Person();
 		Person[] people = {p1, p2, p3, p4, self};
 		boolean done = false;
@@ -101,7 +101,7 @@ public class Main
 	public static void fillInfo(Person person){
 		//sets default privilege prior to questionnaire to 100
 		String name;
-		Person.Identity identity = new Person.Identity();
+		person.setId(new Person.Identity());
 		
 		System.out.println("What is your name? ");
 		name = keyboard.nextLine();
@@ -110,12 +110,11 @@ public class Main
 				+ "For example: I'm a [nationality / place of origin / ethnicity / sexuality / gender expression / etc.]...");
 		keyboard.nextLine();
 		System.out.println("What are your pronouns: ");
-		identity.setPronouns(keyboard.nextLine());
+		person.setPronouns(keyboard.nextLine());
 		System.out.println("Tell us about your background: ");
-		identity.setBackground(keyboard.nextLine());
+		person.setBackground(keyboard.nextLine());
 		
 		person.setName(name);
-
 	}
 
 	public static int doPrivilegeQuestionnaire() {
