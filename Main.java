@@ -108,6 +108,7 @@ public class Main
 		System.out.println("\nHello " + name + ", write a small self-identifying statement about yourself "
 				+ "and your background and identity, this can be anything you like!\n"
 				+ "For example: I'm a [nationality / place of origin / ethnicity / sexuality / gender expression / etc.]...");
+		keyboard.nextLine();
 		System.out.println("What are your pronouns: ");
 		identity.setPronouns(keyboard.nextLine());
 		System.out.println("Tell us about your background: ");
